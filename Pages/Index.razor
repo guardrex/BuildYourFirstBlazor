@@ -1,59 +1,7 @@
 ﻿@page "/"
-@using BuildYourFirstBlazor.Interfaces
-@using BuildYourFirstBlazor.Models
-@inject IPlanetService PlanetService
 
-<h1>Planets</h1>
+<h1>Hello, world!</h1>
 
-<div>
-    <input oninput="@FilterPlanets" placeholder="Filter planets" />
-</div>
+Welcome to your new app.
 
-<div class="planets">
-    @foreach (var planet in _planets)
-    {
-        <figure>
-            <img alt="Image of @planet.Name" src="@planet.ImageUrl" />
-            <figcaption><em>@planet.Name</em></figcaption>
-        </figure>
-    }
-</div>
-
-<div>
-    <h2>Add Planet</h2>
-
-    <input bind="@_newPlanet.Name" placeholder="Name" />
-    <input bind="@_newPlanet.ImageUrl" placeholder="Image Url" style="width:350px" />
-
-    <button class="btn btn-primary" onclick="@AddPlanet">Add Planet</button>
-</div>
-
-<div style="position:absolute;bottom:0">
-    <p>
-        Planet names are &copy;1974-1981 
-        <a href="https://www.bbc.co.uk/programmes/b006q2x0">BBC</a>.
-        Planet images are courtesy of the <a href="https://www.nasa.gov/">
-        National Aeronautics and Space Administration (NASA)</a>.
-    </p>
-</div>
-
-@functions {
-    private IEnumerable<Planet> _planets;
-    private Planet _newPlanet = new Planet();
-
-    protected override void OnInit()
-    {
-        _planets = PlanetService.GetPlanets(null);
-    }
-
-    private void FilterPlanets(UIChangeEventArgs e)
-    {
-        _planets = PlanetService.GetPlanets(e.Value.ToString());
-    }
-
-    private void AddPlanet()
-    {
-        PlanetService.AddPlanet(_newPlanet);
-        _newPlanet = new Planet();
-    }
-}
+<SurveyPrompt Title="How is Blazor working for you?" />

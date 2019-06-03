@@ -1,0 +1,71 @@
+﻿@page "/planets"
+@using WebApplication.Data
+@using WebApplication.Models
+@using WebApplication.Components
+@inject IPlanetService PlanetService
+
+<h1>Planets</h1>
+
+<div>
+    <input oninput="@FilterPlanets" placeholder="Filter planets" />
+</div>
+
+<div>
+    @foreach (var planet in _planets)
+    {
+        <figure onclick="@(() => { _editPlanet = _planets.Single(p => p.Name == planet.Name); })">
+            <img alt="" src="@planet.ImageUrl" />
+            <figcaption>@planet.Name</figcaption>
+        </figure>
+    }
+</div>
+
+@if (_editPlanet != null)
+{
+    <PlanetDetails Planet="@_editPlanet" OnClosePlanetDetails="@(() => { _editPlanet = null; })" />
+}
+
+<div>
+    <h2>Add Planet</h2>
+
+    <input bind="@_newPlanet.Name" placeholder="Name" />
+    <input bind="@_newPlanet.ImageUrl" placeholder="Image Url" style="width:350px" />
+
+    <button class="btn btn-primary" onclick="@AddPlanet">Add Planet</button>
+
+    <span class="text-danger @(_isNewPlanetAdded ? "hidden" : string.Empty)">
+        The planet already exists.
+    </span>
+</div>
+
+<div style="position:absolute;bottom:0;color:white">
+    <p>
+        Planet names are &copy;1974-1981
+        <a href="https://www.bbc.co.uk/programmes/b006q2x0">BBC</a>.
+        Planet images are courtesy of the <a href="https://www.nasa.gov/">
+            National Aeronautics and Space Administration (NASA)
+        </a>.
+    </p>
+</div>
+
+@functions {
+    private IEnumerable<Planet> _planets;
+    private Planet _newPlanet = new Planet();
+    private bool _isNewPlanetAdded = true;
+    private Planet _editPlanet;
+
+    protected override void OnInit()
+    {
+        _planets = PlanetService.GetPlanets();
+    }
+
+    private void FilterPlanets(UIChangeEventArgs e)
+    {
+        _planets = PlanetService.GetPlanets(e.Value.ToString());
+    }
+
+    private void AddPlanet()
+    {
+        _isNewPlanetAdded = PlanetService.AddPlanet(_newPlanet);
+    }
+}

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace BuildYourFirstBlazor
+namespace WebApplication
 {
     public class Program
     {

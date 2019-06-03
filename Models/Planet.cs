@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BuildYourFirstBlazor.Models
+﻿namespace WebApplication.Models
 {
     public class Planet
     {

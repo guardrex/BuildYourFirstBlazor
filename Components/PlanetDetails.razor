@@ -1,0 +1,53 @@
+﻿@using WebApplication.Data
+@using WebApplication.Models
+@inject IPlanetService PlanetService
+
+<div class="planetDetails">
+    <button type="button" class="btn btn-danger" style="float:right"
+            onclick="@OnClosePlanetDetails">
+        <span class="oi oi-x"></span> Close
+    </button>
+
+    <h2>Planet Detail</h2>
+
+    <p>Name: @Planet.Name</p>
+    <p>Image URL: @Planet.ImageUrl</p>
+    <p><img alt="@Planet.Name" src="@Planet.ImageUrl" /></p>
+
+    <hr />
+
+    <input bind="@_editPlanet.Name" placeholder="Name" />
+    <input bind="@_editPlanet.ImageUrl" placeholder="Image Url"
+           style="width:360px" />
+
+    <button class="btn btn-primary" style="margin-top:5px"
+            onclick="@(() => UpdatePlanet())">
+        Update Planet
+    </button>
+
+    <span class="text-danger @(_isPlanetUpdated ? "hidden" : string.Empty)">
+        The planet already exists.
+    </span>
+</div>
+
+
+@functions {
+    private Planet _editPlanet;
+    private bool _isPlanetUpdated = true;
+
+    protected override void OnInit()
+    {
+        _editPlanet = new Planet { Name = Planet.Name, ImageUrl = Planet.ImageUrl };
+    }
+
+    [Parameter]
+    private Planet Planet { get; set; }
+
+    [Parameter]
+    private EventCallback<UIMouseEventArgs> OnClosePlanetDetails { get; set; }
+
+    private void UpdatePlanet()
+    {
+        _isPlanetUpdated = PlanetService.UpdatePlanet(Planet, _editPlanet);
+    }
+}

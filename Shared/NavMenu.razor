@@ -1,5 +1,5 @@
 ﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Doctor Who&trade; Planets</a>
+    <a class="navbar-brand" href="">Galactic Planetary Atlas</a>
     <button class="navbar-toggler" onclick="@ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,15 +12,22 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="planets" Match="NavLinkMatch.All">
+                <span class="oi oi-moon" aria-hidden="true"></span> Planets
+            </NavLink>
+        </li>
     </ul>
-    
-</div>
-
-<div style="position:absolute;bottom:0;padding:15px">
-    <p style="color:lightgray">
-        'Doctor Who' is a registered trademark of the 
-        <a href="https://www.bbc.co.uk/programmes/b006q2x0">BBC</a>.
-    </p>
 </div>
 
 @functions {

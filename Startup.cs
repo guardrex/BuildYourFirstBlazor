@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using BuildYourFirstBlazor.Interfaces;
-using BuildYourFirstBlazor.Services;
+using WebApplication.Data;
 
-namespace BuildYourFirstBlazor
+namespace WebApplication
 {
     public class Startup
     {
